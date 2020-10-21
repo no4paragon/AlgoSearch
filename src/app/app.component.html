@@ -1,0 +1,47 @@
+<div class="ais-InstantSearch">
+  <ais-instantsearch [config]="config">
+    <div class="tag-panel">
+      <div id="tag">
+        <ais-panel header="tag">
+          <ais-refinement-list
+          attribute="Tag"
+          operator="or"
+          limit="10"
+        >
+        </ais-refinement-list>
+        </ais-panel>
+        <ais-clear-refinements
+        buttonLabel="Clear all filters"
+      >
+      </ais-clear-refinements>
+      </div>
+    </div>
+    <div class="left-panel">   
+      <ais-configure [searchParameters]="{ hitsPerPage: 6 }"></ais-configure>
+    </div>
+    <div class="right-panel">
+      <ais-search-box></ais-search-box>
+      <ais-hits>
+        <ng-template let-hits="hits" let-results="results">
+          <ol class="ais-Hits-list">
+            <li *ngFor="let hit of hits" class="ais-Hits-item">
+              <div class="hit-name">
+                <img src="{{hit.LOGO_URL}}" alt="{{hit.logo}}"/><br>
+                <ais-highlight attribute="NEWS_STARTUP_ID" [hit]="hit"></ais-highlight><br>
+                <ais-highlight attribute="TITLE" [hit]="hit"></ais-highlight><br>
+                <ais-highlight attribute="GAIYO" [hit]="hit"></ais-highlight> 
+                <div *ngIf="results.query && results.query.length > 0">
+                  <ais-highlight attribute="LOCATION" [hit]="hit"></ais-highlight>
+                </div>
+              </div>
+            </li>
+          </ol>
+          <div id="pagination">
+            <ais-pagination></ais-pagination>
+          </div>
+        </ng-template>
+      </ais-hits>
+    </div>
+  </ais-instantsearch>
+</div>
+
